@@ -1,0 +1,30 @@
+1.The primary tool used in structured design is a?Structure Chart
+2.The step by step instruction that solve a problem is called?Algorithm
+3.A ring , refers to a record chain the last of which refers to the first record in the chain , is called a?Pointer
+4.The two classification of inputs are?Maintainence and signal
+5.System Implementation phase entails?System check ourts
+6.A decision table facilitates conditions to be related to?Actions
+7.An appraisal of a system performance after it has been installed is called system?Review
+8.Conversion of decimal number 61 to its binary number equivalent is?111101
+9.Conversion of octal number 112 to hexadecimal number is?4A
+10.A positive AND gate is also a negative?OR
+11.What logic function is produced by adding an inverter to each input and output of an AND gate?OR
+12.Flip-Flop outputs are always?Complimentary
+13.The Hexadecimal digits are 0 to 9 and A to?E
+14.A diagram that illustrates the logic of functions in a program is called?Flowchart
+15.The gray code for decimal 7 is?100
+16.What logic function is obtained by adding an inverter to the inputs of an AND gate?NOR
+17.Addition of two binary numbers 10 and 11 is?101
+18.An inverter is also known as?NOT
+19.Flip-flop free from race round problem is?JK
+20.0 and 1 are called which digits?Binary
+21.An error is also known as?Bug
+22.Who invented super computer?Seymour Cray
+23.The 'IC' chip used is computer is made of?Silicon
+24.First Intel processor introduce is?4004
+25.A light sensitive device that converts drawing,printed text or other image into digital form?Scanner
+26.The basic architecture of computet was developed by?John Von Neumann
+27.In how many generation a computer can be classified?5
+28.5th generation computer are based on?Artificial intelligence
+29.GUI stands for?Graphical User Interface
+30.Time during which a job is processed by the computer is?Execution

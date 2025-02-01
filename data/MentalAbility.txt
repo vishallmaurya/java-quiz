@@ -1,0 +1,49 @@
+1.Find the digit at units place of 8^n if n is multiple of 5. 8
+2.If HCF of two numbers 68 and 85 is 17. What is the LCM. Of two numbers. 340
+3.176 when divided by a number gives the remainder 5 and quotient 9. What is the number ? 19
+4.If 1=3, 2=3, 3=5, 4=4, 5=4. Then, 6=? 3
+5.Sally is 54 years old and her mother is 80, how many years ago was Sally's mother times her age? 41
+6.There is a three-digit number. The second digit is four times as big as the third digit, while the first digit is three less than the second digit. What is the number? 141
+7.Solve this logic number sequence puzzle by the correct digit : 8080 = 6, 1357 = 0, 2022 = 1, 1999 = 3, 6666 = ? 4
+8.What should be further in the series: 0, 1, 2, 5, 20, 25, ... ? 150
+9.According to a military code, SYSTEM is SYSMET and NEARER is AENRER. What is the code for FRACTION ?CARFNOIT
+10.The average of three numbers is 29. The average of two of these numbers is 38. What is the third number? 11
+11.10 years back, Latha was half of Uma's age. If the ratio of their present ages is 3:4, what will be the total of their present ages?35
+12.Find the missing number from 2, 7, 14, 23, x, 47.44
+13.If 5 women or 8 girls can do a work in 84 days. In how many days can 10 women and 5 girls can do the same work?32
+14.Find the missing series: 3, 12, 27, 48, 75, 108, ?147
+15.Vandana invested an amount of Rs.8000 in a fixed deposit scheme for 2 year at the rate of 5% pa compound interest. How much amount will Vandana get on maturity of the fixed deposit?8820
+16.The number of permutations that can be formed from all the letters of the word 'BASEBALL' is ____?5040
+17.Vandana spends 25% of her monthly income on household expenses. Her annual income is Rs. 4.32 lakh. What is the annual amount that Vandana spends on household expenses in 8 months together? 72000
+18.Income of Shantanu was Rs.4000. In the first 2 years, his income decreased by 10% and 5% respectively but in the third year, the income increased by 15%. What was his income at the end of third year?3933
+19.In a certain code language COMPUTER is written as RFUVQNPC. How will MEDICINE be written in that code language? EOJDJEFM
+20.A B C D E F G H I J K L M N O P Q R S T U V W X Y Z . Which letter in this alphabet is the eighth letter to the right of the letter and  which is tenth letter to the left of the last but one letter of the alphabet?W
+21.How many pairs of letters are there in the word "CASTRAPHONE" which have as many letters between them in the word as in the alphabet?6
+22.A is B's sister. C is B's mother. D is C's father. E is D's mother. Then, how is A related to D?Granddaughter
+23.Find the missing number in the series - 4, 18, ?, 100, 180, 294, 448.48
+24.Find the wrong number in the series - 1, 2, 6, 15, 31, 56, 91. 91
+25.What should come next in the following letter sequence - A A B A B C A B C D A B C D E A B C D ?E
+26.If South-East becomes North, North-East becomes West and so on. What will West become?South-East
+27.In a row of boys, If A who is 10th from the left and B who is 9th from the right interchange their positions, A becomes 15th from the left. How many boys are there in the row ?23
+29.In a family, there are six members A, B, C, D, E and F. A and B are a married couple, A being the male member. D is the only son of C, who is the brother of A. E is the sister of D. B is the daughter-in-law of F, whose husband has died. How is E related to C ?Daughter
+30.Pointing to a person, a man said to a woman, "His mother is the only daughter of your father." How was the woman related to the person ?Aunt
+31.A girl introduced a boy as the son of' the daughter of the father of her uncle. The boy is girl's _____ ?Brother
+32.In a certain code language,'134' means 'good and tasty'; '478' means 'see good pictures'  and '729' means 'pictures are faint'. Which digit stands for 'see'?8
+33.If Z = 52 and ACT = 48, then BAT will be equal to?46
+34.If ROSE is coded as 6821, CHAIR is coded as 73456 and PREACH is coded as 961473, what will be the code for SEARCH ?214673
+35.Two bus tickets from city A to B and three tickets from city A to C cost Rs. 77 but three tickets from city A to B and two tickets from city A to C cost Rs. 73. What are the fares for city C from A ?17
+36.A woman introduces a man as the son of the brother of her mother. How is the man, related to the woman ?Cousin
+37.In a certain code, MONKEY is written as XDJMNL. How is TIGER written in that code ?QDFHS
+38.There are six persons A. B, C, D, E and F. C is the sister of F. B is the brother of E's husband. D is the father of A and grandfather of F. There are two fathers, three brothers and a mother in the group. Who is the mother ?E
+39.If FRIEND is coded as HUMJTK, how is CANDLE written in that code ?EDRIRL
+40.How many pairs of letters in the word 'CHAIRS' have as many letters between them in the word as in the alphabet?2
+41.If you write down all the numbers from 1 to 100, then how many times do you write 3 ?20
+42.What should come at the place of '?' in the sequence - 1, 2, 3, 10, ?, 9802.99
+43.Sam ranked 9th from the top and 38th from the bottom in a class. How many students are there in the class ?46
+44.Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?West
+45.A man said to a lady, "Your mother's husband's sister is my aunt!! How is the lady related to the man ?Sister
+46.If air is called green , green is called blue, blue is called sky, sky is called yellow, yellow is called water and water is called pink, then what is the color of clear sky ?Sky
+47.K is 40 m South-West of L. If M is 40 m South-East of L, then M is in which direction of K?East
+48.If Pour is written as 4156, Sware is written as 78269, Clear is written as 3@926.Then what is the code for PEARL= ?4926@
+49.Today is Varun's birthday. One year, from today he will be twice as old as he was 12 years ago. How old is Varun today ?25
+50.If MADRAS can be written as NBESBT, how can BOMBAY be written in that code ?CPNCBZ
