@@ -12,12 +12,6 @@ public class SchemaManager {
             System.out.println("Collection 'users' created successfully with schema.");
         }
 
-        // Create 'subjects' collection
-        if (!collectionExists(database, "subjects")) {
-            database.createCollection("subjects");
-            System.out.println("Collection 'subjects' created successfully with schema.");
-        }
-
         // Create 'gamePlay' collection
         if (!collectionExists(database, "gamePlay")) {
             database.createCollection("gamePlay");

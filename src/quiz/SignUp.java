@@ -184,7 +184,6 @@ public class SignUp implements ActionListener {
 	
 	public void actionPerformed(ActionEvent ae) {			
 		if (ae.getSource() == btnNewButton) {
-			System.out.println("button clicked");
 			String name = name_field.getText();
 			String email = user_field.getText();
 			String password = String.valueOf(pass_field.getPassword());
