@@ -1,3 +1,5 @@
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
@@ -80,21 +82,27 @@ public class Result implements ActionListener{
 		
 		JLabel img = new JLabel("New label");
 		img.setBounds(0, 0, 784, 461);
-		img.setIcon(new ImageIcon("faded5.jpg"));
+		img.setIcon(new ImageIcon("./public/images/faded5.jpg"));
 		panel.add(img);
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == Play_Again) {
-			new Buttons() ;
-			frame.setVisible(false) ;
+		if (ae.getSource() == Play_Again) {
+			frame.setVisible(false);
+			frame.dispose();
+			Buttons buttons = new Buttons();
+			buttons.getFrame().setVisible(true);
 		}
-		
-		if(ae.getSource() == Quit) {
-			System.exit(0) ;
+
+		if (ae.getSource() == Quit) {
+			System.exit(0);
 		}
 	}
 	
+	public JFrame getFrame() {
+		return frame;
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

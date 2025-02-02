@@ -1,11 +1,11 @@
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.io.* ;
 
 public class Buttons implements ActionListener {
 
@@ -53,7 +53,7 @@ public class Buttons implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setIcon(new ImageIcon("fields.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("./public/images/fields.jpg"));
 		
 		JLabel lblNewLabel_1 = new JLabel("CHOOSE THE APPROPRIATE");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,7 +99,7 @@ public class Buttons implements ActionListener {
 		lblNewLabel_2.setFont(new Font("MV Boli", Font.BOLD, 20));
 		
 		JLabel lblNewLabel_3 = new JLabel("Label");
-		lblNewLabel_3.setIcon(new ImageIcon("small_open_book.gif"));
+		lblNewLabel_3.setIcon(new ImageIcon("./public/images/small_open_book.gif"));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -182,48 +182,56 @@ public class Buttons implements ActionListener {
 	
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == btnNewButton) {
-			new QuestionFrame("Question.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Question");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_1) {
-			new QuestionFrame("CultureNew.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Culture");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_2) {
-			new QuestionFrame("Riddles.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Riddles");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_3) {
-			new QuestionFrame("History.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("History");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_4) {
-			new QuestionFrame("MentalAbility.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Mental");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_5) {
-			new QuestionFrame("Science_questions.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Science");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_6) {
-			new QuestionFrame("bollywood.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("Bollywood");
+			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_7){
-			new QuestionFrame("ComputerSci.txt") ;
-			frame.setVisible(false) ;
+			frame.setVisible(false);
+			frame.dispose();
+			QuestionFrame qFrame = new QuestionFrame("ComputerScience");
+			qFrame.getFrame().setVisible(true);
 		}
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Buttons();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JFrame getFrame() {
+		return frame;
 	}
 }
