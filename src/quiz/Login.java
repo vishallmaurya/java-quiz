@@ -1,3 +1,5 @@
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
@@ -5,7 +7,10 @@ import javax.swing.* ;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import java.io.* ;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import db.CreateConnection;
 
 public class Login implements ActionListener{
 
@@ -41,7 +46,7 @@ public class Login implements ActionListener{
 		);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("login_page.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("./public/images/login_page.jpg"));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -72,10 +77,10 @@ public class Login implements ActionListener{
 		frame.add(btnNewButton) ;
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("small_bulb.gif"));
+		lblNewLabel_4.setIcon(new ImageIcon("./public/gifs/small_bulb.gif"));
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("small_open_book.gif"));
+		lblNewLabel_5.setIcon(new ImageIcon("./public/gifs/small_open_book.gif"));
 		
 		btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.setBackground(new Color(139, 0, 0));
@@ -134,119 +139,49 @@ public class Login implements ActionListener{
 		frame.getContentPane().setLayout(groupLayout);
 	}
 	
-	static int binarySearch(String[] arr, String x,int length) {
-		int l = 0, r = length - 1;
-		while (l <= r) {
-			int m = l + (r - l) / 2;
-			int res = x.compareTo(arr[m]);
-			// Check if x is present at mid
-			if (res == 0)
-				return m;
-			// If x greater, ignore left half
-			if (res > 0)
-				l = m + 1;
-			// If x is smaller, ignore right half
-			else
-				r = m - 1;
-		}
-		
-		return -1;
-	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource()== btnNewButton_1) {
+		MongoDatabase database = CreateConnection.getDatabase();
+		MongoCollection<Document> usersCollection = database.getCollection("users");
+
+		if (ae.getSource() == btnNewButton_1) {
 			String user = textField.getText();
-			char[] pswd = textField_1.getPassword();
-			
-			String name_data[]=new String[10];
-			String pswd_data[]=new String[10];
-			int index=0;
-			
-			try(BufferedReader user_file = new BufferedReader(new FileReader (new File("LoginData.txt")))){
-				String s = user_file.readLine();
-				int starting_index = 0, end_index = 0;
-			
-				while(s!= null){
-					for(int i=0;i<s.length();i++){
-						if(s.charAt(i)==';'){
-							starting_index=i;
-							for(int j=i+1;j<s.length();j++){
-								if(s.charAt(j)==';'){
-									end_index=j;
-									break;
-								}
-							}
-							break;
-						}
-					}	
-					
-					if(index>=name_data.length){
-						String temp1[]=new String[name_data.length*2];
-						String temp2[]=new String[name_data.length*2];
-						for(int i=0;i<name_data.length;i++){
-							temp1[i]=name_data[i];
-							temp2[i]=pswd_data[i];
-						}
-						name_data=temp1;
-						pswd_data=temp2;
-					}
-			
-					name_data[index]=s.substring(0, starting_index);
-					pswd_data[index]=s.substring(starting_index+1, end_index);
-					index++;
-					s=user_file.readLine();
-				}
-			}catch(FileNotFoundException e) {
-				System.out.println ("Filename not found!");
-			}catch(IOException ex){
-				ex.printStackTrace();
-			}
-		
-			String temp,temp_pswd ;
-			
-			for (int i = 0; i < index-1; i++) {
-				for (int j = i + 1; j < index; j++) {
-				// to compare one string with other strings
-					if (name_data[i].compareTo(name_data[j]) > 0) {
-					// swapping
-						temp = name_data[i];
-						temp_pswd=pswd_data[i];
-						name_data[i] = name_data[j];
-						pswd_data[i] = pswd_data[j];
-						name_data[j] = temp;
-						pswd_data[j] = temp_pswd;
-					}
-				}
-			}
-			int user_index = binarySearch(name_data, user,index);
-	
-			if(user_index!=-1 && ((String.valueOf(pswd)).equalsIgnoreCase(pswd_data[user_index]))) {
-				lblNewLabel_6.setBounds(320,340,140,40);
-				lblNewLabel_6.setText("Success") ;
-				
-				new Instruction() ;
-				frame.setVisible(false) ;
-			}else{
-				lblNewLabel_6.setBounds(250,340,400,40);
-				lblNewLabel_6.setText("Invalid input") ;
+			String password = String.valueOf(textField_1.getPassword());
+
+			Document query = new Document("email", user).append("password", password);
+			Document foundUser = usersCollection.find(query).first();
+
+			if (foundUser != null) {
+				lblNewLabel_6.setBounds(320, 340, 140, 40);
+				lblNewLabel_6.setText("Success");
+
+				// new Instruction() ;
+				frame.setVisible(false);
+			} else {
+				lblNewLabel_6.setBounds(250, 340, 400, 40);
+				lblNewLabel_6.setText("Invalid input");
 			}
 		}
-		
-		if(ae.getSource() == btnNewButton) {
-			new Sign_Up() ;
-			frame.setVisible(false) ;
+
+		if (ae.getSource() == btnNewButton) {
+			// new Sign_Up() ;
+			frame.setVisible(false);
 		}
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Login();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JFrame getFrame() {
+		return frame ;
 	}
+	
+	// public static void main(String[] args) {
+	// 	SwingUtilities.invokeLater(new Runnable() {
+	// 		public void run() {
+	// 			try {
+	// 				new Login();
+	// 			} catch (Exception e) {
+	// 				e.printStackTrace();
+	// 			}
+	// 		}
+	// 	});
+	// }
 }

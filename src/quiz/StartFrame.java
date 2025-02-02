@@ -1,29 +1,29 @@
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
-
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class Start_frame implements ActionListener {
-
+public class StartFrame implements ActionListener {
+	private JButton start;
+	private JButton quit;
 	private JFrame frame;
-	private JButton start ;
-	private JButton quit ;
 
-	public Start_frame() {
+	public StartFrame() {
 		initialize();
-		start.addActionListener(this) ;
-		quit.addActionListener(this) ;
+		start.addActionListener(this);
+		quit.addActionListener(this);
 	}
 
 	private void initialize() {
-		frame = new JFrame();
-		frame.setVisible(true) ;
+		frame = new JFrame() ;
+		frame.setVisible(true);
 		frame.setBounds(100, 100, 800, 500);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 153));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -31,35 +31,34 @@ public class Start_frame implements ActionListener {
 			groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE).addGap(1))
 		);
-		
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-					.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE).addGap(0))
 		);
-		
+
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon("front.jpg"));
-		
+		logo.setIcon(new ImageIcon("./public/images/front.jpg"));
+
 		start = new JButton("START");
 		start.setBackground(new Color(51, 51, 0));
 		start.setForeground(new Color(230, 230, 250));
 		start.setFont(new Font("Swis721 Hv BT", Font.BOLD | Font.ITALIC, 15));
-		frame.add(start) ;
-		
+		frame.add(start);
+
 		quit = new JButton("QUIT");
 		quit.setBackground(new Color(102, 51, 0));
 		quit.setForeground(Color.WHITE);
 		quit.setFont(new Font("Swis721 BlkCn BT", Font.BOLD | Font.ITALIC, 15));
-		frame.add(quit) ;
-		
+		frame.add(quit);
+
 		JLabel think = new JLabel("");
 		think.setHorizontalAlignment(SwingConstants.CENTER);
-		think.setIcon(new ImageIcon("think.gif"));
-		
+		think.setIcon(new ImageIcon("./public/gifs/think.gif"));
+
 		JLabel book = new JLabel("");
-		book.setIcon(new ImageIcon("books.gif"));
+		book.setIcon(new ImageIcon("./public/gifs/books.gif"));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		
+
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
 					.addComponent(logo, GroupLayout.PREFERRED_SIZE, 485, Short.MAX_VALUE)
@@ -74,7 +73,7 @@ public class Start_frame implements ActionListener {
 					.addPreferredGap(ComponentPlacement.RELATED).addComponent(book, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addGap(100))))
 		);
-		
+
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 					.addComponent(think, GroupLayout.PREFERRED_SIZE, 199, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED)
@@ -84,25 +83,31 @@ public class Start_frame implements ActionListener {
 					.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(logo, GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE).addGap(147))
 		);
-		
+
 		panel.setLayout(gl_panel);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-	
+
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == start) {
-			new Login() ;
+		if (ae.getSource() == start) {
+			frame.setVisible(false);
+			frame.dispose(); 
+			Login loginFrame = new Login();
+			loginFrame.getFrame().setVisible(true);
+
+			loginFrame.getFrame().revalidate();
+			loginFrame.getFrame().repaint();
 		}
-		if(ae.getSource() == quit) {
-			System.exit(0) ;
+		if (ae.getSource() == quit) {
+			System.exit(0);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new Start_frame();
+					new StartFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
