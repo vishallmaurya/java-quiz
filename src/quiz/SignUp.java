@@ -212,7 +212,10 @@ public class SignUp implements ActionListener {
 				Document newUser = new Document("name", name).append("email", email).append("password", password);
 				userCollection.insertOne(newUser);
 				pass_warn.setText("Successfully registered");
-				// new Instruction();
+				frame.setVisible(false);
+				frame.dispose();
+				Instruction instruction = new Instruction();
+				instruction.getFrame().setVisible(true);
 			}
 		}
 	}
@@ -220,16 +223,4 @@ public class SignUp implements ActionListener {
 	public JFrame getFrame() {
 		return frame;
 	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new SignUp();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}	
 }

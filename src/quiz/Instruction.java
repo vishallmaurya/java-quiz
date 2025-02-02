@@ -1,9 +1,10 @@
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
 
 public class Instruction implements ActionListener {
-
 	private JFrame frame;
 	private JButton Okay ;
 
@@ -80,7 +81,7 @@ public class Instruction implements ActionListener {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(0, 0, 784, 461);
-		lblNewLabel.setIcon(new ImageIcon("pen4.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("./public/images/pen4.jpg"));
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
@@ -95,20 +96,15 @@ public class Instruction implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == Okay) {
-			new Buttons() ;
+		if (ae.getSource() == Okay) {
+			frame.setVisible(false);
+			frame.dispose();
+			Buttons buttons = new Buttons();
+			buttons.getFrame().setVisible(true);
 		}
 	}
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Instruction();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JFrame getFrame() {
+		return frame;
 	}
 }

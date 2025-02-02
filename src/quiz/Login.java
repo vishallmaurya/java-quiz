@@ -154,9 +154,10 @@ public class Login implements ActionListener{
 			if (foundUser != null) {
 				lblNewLabel_6.setBounds(320, 340, 140, 40);
 				lblNewLabel_6.setText("Success");
-
-				// new Instruction() ;
-				// frame.setVisible(false);
+				frame.setVisible(false);
+				frame.dispose();
+				Instruction instruction = new Instruction();
+				instruction.getFrame().setVisible(true);
 			} else {
 				lblNewLabel_6.setBounds(250, 340, 400, 40);
 				lblNewLabel_6.setText("Invalid input");
