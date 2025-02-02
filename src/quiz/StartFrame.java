@@ -94,9 +94,6 @@ public class StartFrame implements ActionListener {
 			frame.dispose(); 
 			Login loginFrame = new Login();
 			loginFrame.getFrame().setVisible(true);
-
-			loginFrame.getFrame().revalidate();
-			loginFrame.getFrame().repaint();
 		}
 		if (ae.getSource() == quit) {
 			System.exit(0);

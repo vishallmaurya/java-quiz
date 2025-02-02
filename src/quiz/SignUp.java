@@ -1,239 +1,235 @@
-import javax.swing.* ;
+package quiz;
+
 import java.awt.* ;
 import java.awt.event.* ;
-import java.io.* ;
+import javax.swing.* ;
 
-public class SignUp implements ActionListener {
-	String name_s, user_name , pswd_s, conPswd_s ;
-	char[] pswd, conPswd ;
-	
-	JFrame jf ;
-	JLabel u, p, msg, name, c_p;
- 	JTextField un, name_f ;														//creating textfield
-	JPasswordField pa, c_pa ;															//creating passwordfield
-	JButton bt ;
-	
-	SignUp() {
-		jf = new JFrame("Sign Up") ;
-		jf.setSize(700, 600);
-		jf.setLayout(null);
-		jf.setVisible(true);
-		jf.setLocationRelativeTo(null);											//opens frame from the center of the window
-		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
-		jf.getContentPane().setBackground(Color.getHSBColor(200, 780, 800));	//generating background colour through HSB
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import org.bson.Document;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import db.CreateConnection;
+
+
+public class SignUp implements ActionListener {	
+	private JFrame frame;
+	private JTextField user_field;
+	private JPasswordField pass_field;
+	private JPasswordField con_field;
+	private JTextField name_field;
+	private JLabel email ;
+	private JLabel password ;
+	private JLabel con_pass ;
+	private JLabel pass_warn ;
+	private JLabel usename_warn ;
+	private JLabel name ;
+	private JButton btnNewButton ;
+
+	public SignUp() {
+		initialize();
 		
-		Font f=new Font("Arial",Font.BOLD,15);									//font dec 
+		btnNewButton.addActionListener(this) ;
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setVisible(true) ;
+		frame.setBounds(100, 100, 800, 500);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		name = new JLabel("Name     : ") ;
-		bt = new JButton("Register") ;
-		u = new JLabel("UserName : ");
-		p = new JLabel("Password : ");
-		c_p = new JLabel("Confirm Password : ") ;
-		msg = new JLabel();
-		name_f = new JTextField() ;
-		un = new JTextField();													//creating textfield
-		c_pa = new JPasswordField() ;
-		pa = new JPasswordField();												//creating passwordfield
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 204, 102));
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+		);
 		
-		name.setBounds(150, 120, 200, 40) ;
-		name_f.setBounds(300, 120, 200, 40) ;
-		u.setBounds(150,170,200,40);//set loc & size
-		un.setBounds(300,170,200,40);
-		p.setBounds(150,220,200,40);
-		pa.setBounds(300,220,200,40);
-		c_p.setBounds(150, 270, 200, 40) ;
-		c_pa.setBounds(300, 270, 200, 40) ;
-		bt.setBounds(280,370,140,50);
-		msg.setBounds(270, 440, 200, 50) ;
+		JLabel quote = new JLabel("");
+		quote.setVerticalAlignment(SwingConstants.TOP);
+		quote.setIcon(new ImageIcon("./public/images/SIGN UP 2.jpg"));
 		
-		name.setFont(f) ;
-		name_f.setFont(f) ;
-		u.setFont(f);
-		p.setFont(f);
-		bt.setFont(f) ;
-		c_p.setFont(f) ;
-		msg.setFont(f) ;
+		email = new JLabel("EMAIL");
+		email.setForeground(new Color(102, 0, 0));
+		email.setBackground(new Color(102, 51, 0));
+		email.setFont(new Font("MV Boli", Font.BOLD, 15));
 		
-		jf.add(u);//adding to container
-		jf.add(name) ;
-		jf.add(name_f) ;
-		jf.add(p);
-		jf.add(un);
-		jf.add(bt);
-		jf.add(msg);
-		jf.add(pa);	
-		jf.add(c_p) ;
-		jf.add(c_pa) ;
+		password = new JLabel("PASSWORD");
+		password.setBackground(new Color(102, 51, 0));
+		password.setFont(new Font("MV Boli", Font.BOLD, 15));
+		password.setForeground(new Color(102, 0, 0));
 		
-		name_f.addActionListener(this) ;
-		un.addActionListener(this) ;
-		bt.addActionListener(this) ;
-		pa.addActionListener(this) ;
-		c_pa.addActionListener(this) ;
+		con_pass = new JLabel("Confirm Password");
+		con_pass.setBackground(new Color(102, 51, 0));
+		con_pass.setForeground(new Color(102, 0, 0));
+		con_pass.setFont(new Font("MV Boli", Font.BOLD, 15));
+		
+		user_field = new JTextField();
+		user_field.setColumns(10);
+		
+		pass_field = new JPasswordField();
+		
+		con_field = new JPasswordField();
+		con_field.setEchoChar('*');
+		
+		pass_warn = new JLabel("");
+		pass_warn.setFont(new Font("MV Boli", Font.BOLD, 13));
+		pass_warn.setForeground(new Color(255, 0, 0));
+		
+		usename_warn = new JLabel("");
+		usename_warn.setFont(new Font("MV Boli", Font.BOLD, 12));
+		usename_warn.setForeground(new Color(255, 0, 0));
+		
+		JLabel book_gif = new JLabel("");
+		book_gif.setHorizontalAlignment(SwingConstants.CENTER);
+		book_gif.setIcon(new ImageIcon("./public/gifs/learning_small.gif"));
+		
+		btnNewButton = new JButton("Register");
+		btnNewButton.setBackground(new Color(153, 0, 0));
+		btnNewButton.setFont(new Font("MV Boli", Font.BOLD, 12));
+		btnNewButton.setForeground(new Color(255, 204, 255));
+		
+		name = new JLabel("NAME");
+		name.setForeground(new Color(102, 51, 0));
+		name.setFont(new Font("MV Boli", Font.BOLD, 15));
+		
+		name_field = new JTextField();
+		name_field.setColumns(10);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(quote, GroupLayout.PREFERRED_SIZE, 508, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(usename_warn, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel.createSequentialGroup()
+											.addGap(18)
+											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(password, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(con_pass, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+												.addComponent(email, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(name, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+									.addPreferredGap(ComponentPlacement.RELATED))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(pass_warn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGap(23)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+									.addGap(11))
+								.addComponent(con_field, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+								.addComponent(pass_field, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+								.addComponent(user_field, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(name_field)
+									.addGap(3))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(66)
+							.addComponent(book_gif, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addComponent(quote, GroupLayout.PREFERRED_SIZE, 700, Short.MAX_VALUE)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(80)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(name)
+						.addComponent(name_field, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(email)
+						.addComponent(user_field, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(usename_warn)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(password)
+						.addComponent(pass_field, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(36)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(con_pass)
+						.addComponent(con_field, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(pass_warn)
+							.addGap(32))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnNewButton)
+							.addGap(18)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(book_gif, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addGap(243))
+		);
+		panel.setLayout(gl_panel);
+		frame.getContentPane().setLayout(groupLayout);
 	}
 	
-	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == name_f)
-			name_s = name_f.getText()  ;
-		if(ae.getSource() == un)
-			user_name = un.getText() ;
-		if(ae.getSource() == pa) {	
-			pswd = pa.getPassword() ;
-			pswd_s = String.valueOf(pswd) ;
-		}
-		if(ae.getSource() == c_pa) {
-			conPswd = c_pa.getPassword() ;
-			conPswd_s = String.valueOf(conPswd) ;
-			
-			if(!(pswd_s.equals(conPswd_s)))
-				msg.setText("Invalid Password") ;
-			else
-				msg.setText(" ") ;
-		}
-			
-		if(ae.getSource() == bt) {
-			int check = 1 ;
-			
-			if(name_s == null || user_name == null || pswd_s == null || conPswd_s == null) {
-				msg.setText("Please fill the details") ;
-				check = 0 ;
-			}else {
-				msg.setText(" ") ;
-				check = 1 ;
-			}
-			
-			if(check == 1) {
-				int existing_user =  check() ;
-				
-				if(existing_user == 0) {
-					String data = user_name + ";" + pswd_s + ";" + name_s + ";\n" ;
-					msg.setText("Successfully Registered") ;
-					append(data) ;
-					new Window2() ;
-					jf.setVisible(false) ; 
-				}else {
-					msg.setText("Username already registered") ;
-				}	
-			}	
-		}
-	}
-	
-	void append(String data) {
-		try {
-			File f1 = new File("LoginData.txt");
-			if(!f1.exists()) {
-				f1.createNewFile();
+	public void actionPerformed(ActionEvent ae) {			
+		if (ae.getSource() == btnNewButton) {
+			System.out.println("button clicked");
+			String name = name_field.getText();
+			String email = user_field.getText();
+			String password = String.valueOf(pass_field.getPassword());
+			String confirmPassword = String.valueOf(con_field.getPassword());
+
+			if (!password.equals(confirmPassword)) {
+				pass_warn.setText("Passwords do not match!");
+				return;
 			}
 
-			FileWriter fileWritter = new FileWriter(f1.getName(),true);
-			BufferedWriter bw = new BufferedWriter(fileWritter);
-			bw.write(data);
-			bw.close();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		return ;
-	}
-	
-	int check() {
-		String user = un.getText();
-		char[] pswd = pa.getPassword();
+			if (name.trim().equals("") || email.trim().equals("") || password.trim().equals("")
+					|| confirmPassword.trim().equals("")) {
+				pass_warn.setText("All fields are mandatory");
+				return;
+			}
+
+			MongoDatabase database = CreateConnection.getDatabase();
+			MongoCollection<Document> userCollection = database.getCollection("users");
+
+			Document existingUser = userCollection.find(new Document("email", email)).first();
 			
-		String name_data[]=new String[10];
-		String pswd_data[]=new String[10];
-		int index=0;
-		
-		try(BufferedReader user_file = new BufferedReader(new FileReader (new File("LoginData.txt")))){
-			String s = user_file.readLine();
-			int starting_index = 0, end_index = 0;
-		
-			while(s!= null){
-				for(int i=0;i<s.length();i++){
-					if(s.charAt(i)==';'){
-						starting_index=i;
-						for(int j=i+1;j<s.length();j++){
-							if(s.charAt(j)==';'){
-								end_index=j;
-								break;
-							}
-						}
-						break;
-					}
-				}	
-				
-				if(index>=name_data.length){
-					String temp1[]=new String[name_data.length*2];
-					String temp2[]=new String[name_data.length*2];
-					for(int i=0;i<name_data.length;i++){
-						temp1[i]=name_data[i];
-						temp2[i]=pswd_data[i];
-					}
-					name_data=temp1;
-					pswd_data=temp2;
-				}
-		
-				name_data[index]=s.substring(0, starting_index);
-				pswd_data[index]=s.substring(starting_index+1, end_index);
-				index++;
-				s=user_file.readLine();
-			}
-		}catch(FileNotFoundException e) {
-			System.out.println ("Filename not found!");
-		}catch(IOException ex){
-			ex.printStackTrace();
-		}
-		
-		String temp,temp_pswd ;
-		
-		for (int i = 0; i < index-1; i++) {
-			for (int j = i + 1; j < index; j++) {
-			// to compare one string with other strings
-				if (name_data[i].compareTo(name_data[j]) > 0) {
-				// swapping
-					temp = name_data[i];
-					temp_pswd=pswd_data[i];
-					name_data[i] = name_data[j];
-					pswd_data[i] = pswd_data[j];
-					name_data[j] = temp;
-					pswd_data[j] = temp_pswd;
-				}
+			if (existingUser != null) {
+				usename_warn.setText("Email already exists");
+			} else {
+				Document newUser = new Document("name", name).append("email", email).append("password", password);
+				userCollection.insertOne(newUser);
+				pass_warn.setText("Successfully registered");
+				// new Instruction();
 			}
 		}
-		
-		int user_index=binarySearch(name_data, user,index);
-		
-		if(user_index!=-1 && ((String.valueOf(user)).equalsIgnoreCase(name_data[user_index]))) {
-			return 1 ;
-		}else{
-			return 0 ;
-		}
 	}
-	
-	static int binarySearch(String[] arr, String x,int length) {
-		int l = 0, r = length - 1;
-		while (l <= r) {
-			int m = l + (r - l) / 2;
-			int res = x.compareTo(arr[m]);
-			// Check if x is present at mid
-			if (res == 0)
-				return m;
-			// If x greater, ignore left half
-			if (res > 0)
-				l = m + 1;
-			// If x is smaller, ignore right half
-			else
-				r = m - 1;
-		}
 		
-		return -1;
+	public JFrame getFrame() {
+		return frame;
 	}
-	
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new SignUp() ;
+				try {
+					new SignUp();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		}) ;
-	}
+		});
+	}	
 }

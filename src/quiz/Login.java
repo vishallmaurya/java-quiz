@@ -156,32 +156,24 @@ public class Login implements ActionListener{
 				lblNewLabel_6.setText("Success");
 
 				// new Instruction() ;
-				frame.setVisible(false);
+				// frame.setVisible(false);
 			} else {
 				lblNewLabel_6.setBounds(250, 340, 400, 40);
 				lblNewLabel_6.setText("Invalid input");
+				lblNewLabel_6.revalidate();
+				lblNewLabel_6.repaint();
 			}
 		}
 
 		if (ae.getSource() == btnNewButton) {
-			// new Sign_Up() ;
 			frame.setVisible(false);
+			frame.dispose(); 
+			SignUp signupFrame = new SignUp();
+			signupFrame.getFrame().setVisible(true);
 		}
 	}
 	
 	public JFrame getFrame() {
 		return frame ;
 	}
-	
-	// public static void main(String[] args) {
-	// 	SwingUtilities.invokeLater(new Runnable() {
-	// 		public void run() {
-	// 			try {
-	// 				new Login();
-	// 			} catch (Exception e) {
-	// 				e.printStackTrace();
-	// 			}
-	// 		}
-	// 	});
-	// }
 }
