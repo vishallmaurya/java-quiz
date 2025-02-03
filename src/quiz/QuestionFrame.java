@@ -34,9 +34,11 @@ public class QuestionFrame implements ActionListener{
 	private boolean[] attempt;
 	private List<Integer> backCounterIndex;
 	Integer temp = 0;
+	String subject;
 	int count = 0, total = 0, starting_index = 0, end_index = 0,nextCount = 0 ;
 	
 	public QuestionFrame(String subject) {
+		this.subject = subject;
 		attempt = new boolean[10];
 		backCounterIndex = new ArrayList<>();
 		
@@ -205,7 +207,7 @@ public class QuestionFrame implements ActionListener{
 		if (ae.getSource() == Quit || ae.getSource() == Final) {
 			frame.setVisible(false);
 			frame.dispose();
-			Result result = new Result(total, correctAns);
+			Result result = new Result(subject, total, correctAns);
 			result.getFrame().setVisible(true);
 		}
 
@@ -260,16 +262,5 @@ public class QuestionFrame implements ActionListener{
 	
 	public JFrame getFrame() {
 		return frame;
-	}
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new QuestionFrame("bollywood");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }

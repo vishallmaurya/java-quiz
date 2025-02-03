@@ -9,6 +9,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import auth.Authenticate;
+
 import org.bson.Document;
 import db.CreateConnection;
 
@@ -155,6 +158,7 @@ public class Login implements ActionListener{
 			if (foundUser != null) {
 				lblNewLabel_6.setBounds(320, 340, 140, 40);
 				lblNewLabel_6.setText("Success");
+				Authenticate.setUser(foundUser.getObjectId("_id"));
 				frame.setVisible(false);
 				frame.dispose();
 				Instruction instruction = new Instruction();

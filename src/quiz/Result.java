@@ -4,6 +4,14 @@ import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
 
+import org.bson.Document;
+
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import auth.Authenticate;
+import db.CreateConnection;
+
 public class Result implements ActionListener{
 
 	private JFrame frame;
@@ -13,14 +21,31 @@ public class Result implements ActionListener{
 	private JLabel Wrong ;
 	private JButton Quit ;
 	private JButton Play_Again ;
-	int attempt , correct ;	
+	private int attempt, correct;
+	private String subject;
 
-	public Result(int att , int corr) {
-		attempt = att ;
-		correct = corr ;		
-		initialize();			
-		Quit.addActionListener(this) ;
-		Play_Again.addActionListener(this) ;
+	public Result(String subject, int att, int corr) {
+		attempt = att;
+		correct = corr;
+		this.subject = subject;
+		store_result();
+		initialize();
+		Quit.addActionListener(this);
+		Play_Again.addActionListener(this);
+	}
+	
+	private void store_result() {
+		MongoDatabase database = CreateConnection.getDatabase();
+		MongoCollection<Document> categoryCollection = database.getCollection("category");
+		MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
+
+		Document categoryInfo = categoryCollection.find(new Document("category", subject)).first();
+		Document newGamePlay = new Document("subject_chosen", categoryInfo.getObjectId("_id"))
+								.append("total_attempts", attempt)
+								.append("total_correct", correct).append("user_id", Authenticate.getUser());
+
+		gamePlayCollection.insertOne(newGamePlay);
+		CreateConnection.closeConnection();
 	}
 
 	private void initialize() {
@@ -101,17 +126,5 @@ public class Result implements ActionListener{
 	
 	public JFrame getFrame() {
 		return frame;
-	}
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Result(0,0);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }

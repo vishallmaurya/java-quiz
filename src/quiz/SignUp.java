@@ -12,6 +12,7 @@ import org.bson.Document;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import auth.Authenticate;
 import db.CreateConnection;
 
 
@@ -210,6 +211,7 @@ public class SignUp implements ActionListener {
 			} else {
 				Document newUser = new Document("name", name).append("email", email).append("password", password);
 				userCollection.insertOne(newUser);
+				Authenticate.setUser(newUser.getObjectId("_id"));
 				pass_warn.setText("Successfully registered");
 				frame.setVisible(false);
 				frame.dispose();
