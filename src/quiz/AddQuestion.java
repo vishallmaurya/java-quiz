@@ -3,6 +3,7 @@ package quiz;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 import org.bson.Document;
 
@@ -64,7 +65,6 @@ public class AddQuestion implements ActionListener {
         answer.setBounds(160, 220, 200, 30);
         frame.getContentPane().add(answer);
 
-        
         submit = new JButton("Submit");
         submit.setFont(new Font("Stencil", Font.BOLD, 18));
         submit.setBounds(320, 300, 150, 40);
@@ -81,6 +81,23 @@ public class AddQuestion implements ActionListener {
         lblNewLabel.setBounds(0, 0, 784, 461);
         lblNewLabel.setIcon(new ImageIcon("./public/images/pen4.jpg"));
         frame.getContentPane().add(lblNewLabel);
+
+
+        question.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+            }
+    
+            public void removeUpdate(DocumentEvent e) {
+                if(question.getText().isEmpty()){
+                    error.setText("") ;
+                }
+            }
+    
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+
+        
     }
 
     public void actionPerformed(ActionEvent ae) {

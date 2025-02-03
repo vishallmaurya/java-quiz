@@ -35,6 +35,7 @@ public class QuestionFrame implements ActionListener{
 	
 	
 	public QuestionFrame(String subject) {
+		System.out.println(subject);
 		initialize();
 		fetchQuestions(subject);
 		showQues();
@@ -53,8 +54,9 @@ public class QuestionFrame implements ActionListener{
 	private void fetchQuestions(String subject) {
 		MongoDatabase database = CreateConnection.getDatabase();
 		MongoCollection<Document> questionsCollection = database.getCollection("questions");
-		questionsList = questionsCollection.find(new Document("subject_id", subject)).into(new ArrayList<>());
+		questionsList = questionsCollection.find(new Document("category", subject)).into(new ArrayList<>());
 		Collections.shuffle(questionsList);
+		CreateConnection.closeConnection();
 	}
 
 	private void showQues() {

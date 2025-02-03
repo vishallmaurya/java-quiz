@@ -98,7 +98,7 @@ public class Buttons implements ActionListener {
 		lblNewLabel_2.setForeground(new Color(0, 0, 153));
 		lblNewLabel_2.setFont(new Font("MV Boli", Font.BOLD, 20));
 		
-		JLabel lblNewLabel_3 = new JLabel("Label");
+		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("./public/images/small_open_book.gif"));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -184,25 +184,25 @@ public class Buttons implements ActionListener {
 		if(ae.getSource() == btnNewButton) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("Question");
+			QuestionFrame qFrame = new QuestionFrame("gk");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_1) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("Culture");
+			QuestionFrame qFrame = new QuestionFrame("culture");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_2) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("Riddles");
+			QuestionFrame qFrame = new QuestionFrame("riddles");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_3) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("History");
+			QuestionFrame qFrame = new QuestionFrame("history");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_4) {
@@ -214,19 +214,19 @@ public class Buttons implements ActionListener {
 		if(ae.getSource() == btnNewButton_5) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("Science");
+			QuestionFrame qFrame = new QuestionFrame("science");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_6) {
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("Bollywood");
+			QuestionFrame qFrame = new QuestionFrame("bollywood");
 			qFrame.getFrame().setVisible(true);
 		}
 		if(ae.getSource() == btnNewButton_7){
 			frame.setVisible(false);
 			frame.dispose();
-			QuestionFrame qFrame = new QuestionFrame("ComputerScience");
+			QuestionFrame qFrame = new QuestionFrame("cs");
 			qFrame.getFrame().setVisible(true);
 		}
 	}

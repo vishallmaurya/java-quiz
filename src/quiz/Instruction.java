@@ -88,7 +88,7 @@ public class Instruction implements ActionListener {
 		lblNewLabel_4.setBounds(45, 223, 46, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 		
-		Okay = new JButton();
+		Okay = new JButton("Play");
 		Okay.setBackground(new Color(253, 245, 230));
 		Okay.setFont(new Font("Stencil", Font.BOLD, 22));
 		Okay.setBounds(579, 406, 150, 44);

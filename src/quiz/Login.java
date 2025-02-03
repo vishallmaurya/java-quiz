@@ -147,9 +147,10 @@ public class Login implements ActionListener{
 		if (ae.getSource() == btnNewButton_1) {
 			String user = textField.getText();
 			String password = String.valueOf(textField_1.getPassword());
-
 			Document query = new Document("email", user).append("password", password);
 			Document foundUser = usersCollection.find(query).first();
+
+			CreateConnection.closeConnection();
 
 			if (foundUser != null) {
 				lblNewLabel_6.setBounds(320, 340, 140, 40);
