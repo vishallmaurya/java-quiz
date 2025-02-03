@@ -18,6 +18,12 @@ public class SchemaManager {
             System.out.println("Collection 'gamePlay' created successfully with schema.");
         }
 
+        // Create 'category' collection
+        if (!collectionExists(database, "category")) {
+            database.createCollection("category");
+            System.out.println("Collection 'category' created successfully!");
+        }
+
         // Create 'questions' collection
         if (!collectionExists(database, "questions")) {
             database.createCollection("questions");
@@ -32,5 +38,9 @@ public class SchemaManager {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        SchemaManager.createCollections();;
     }
 }

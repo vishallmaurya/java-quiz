@@ -30,15 +30,24 @@ public class QuestionFrame implements ActionListener{
 	private JProgressBar progressBar;
 	private List<Document> questionsList;
 	private int currentIndex = 0;
-	private int attempt = 0, correctAns = 0 , progressBarCounter = 0;
-	int count = 0, total = 0, starting_index = 0, end_index = 0, n = 0, showNext = 0,back_counter = 0 , nextCount = 0 ;
-	
+	private int correctAns = 0, progressBarCounter = 0;
+	private boolean[] attempt;
+	private List<Integer> backCounterIndex;
+	Integer temp = 0;
+	int count = 0, total = 0, starting_index = 0, end_index = 0,nextCount = 0 ;
 	
 	public QuestionFrame(String subject) {
-		System.out.println(subject);
+		attempt = new boolean[10];
+		backCounterIndex = new ArrayList<>();
+		
+		
+		for (int i = 0; i < 10; i++) {
+			attempt[i] = false;
+		}
+
 		initialize();
 		fetchQuestions(subject);
-		showQues();
+		showQues(temp);
 
 		Answer.addActionListener(this);
 		Submit.addActionListener(this);
@@ -56,13 +65,18 @@ public class QuestionFrame implements ActionListener{
 		MongoCollection<Document> questionsCollection = database.getCollection("questions");
 		questionsList = questionsCollection.find(new Document("category", subject)).into(new ArrayList<>());
 		Collections.shuffle(questionsList);
+		
+		if (questionsList.size() > 10) {
+			questionsList = questionsList.subList(0, 10);
+		}
+
 		CreateConnection.closeConnection();
 	}
 
-	private void showQues() {
-		if (currentIndex < questionsList.size()) {
-            Document questionDoc = questionsList.get(currentIndex);
-            Question.setText((currentIndex + 1) + ". " + questionDoc.getString("question"));
+	private void showQues(int ind) {
+		if (ind < questionsList.size()) {
+            Document questionDoc = questionsList.get(ind);
+            Question.setText((ind + 1) + ". " + questionDoc.getString("question"));
         }
 	}
 	
@@ -170,11 +184,11 @@ public class QuestionFrame implements ActionListener{
 			Submit.setEnabled(true);
 		}
 
-		if (ae.getSource() == Submit) {
-			attempt++;
+		if (ae.getSource() == Submit && attempt[temp] == false) {
+			attempt[temp] = true;
+			total++;
 			progressBarCounter += 10;
 			progressBar.setValue(progressBarCounter);
-			back_counter--;
 			corr.setVisible(true);
 			Submit.setEnabled(false);
 
@@ -188,42 +202,46 @@ public class QuestionFrame implements ActionListener{
 			}
 		}
 
-		if (ae.getSource() == Quit) {
-			// frame.setVisible(false) ;
-			// new Result(attempt, correctAns) ;
+		if (ae.getSource() == Quit || ae.getSource() == Final) {
+			frame.setVisible(false);
+			frame.dispose();
+			Result result = new Result(total, correctAns);
+			result.getFrame().setVisible(true);
 		}
 
 		if (ae.getSource() == Next) {
-			showNext++;
-			back_counter++;
 			nextCount++;
-			currentIndex++;
+			if (attempt[temp] == false) {
+				backCounterIndex.add(currentIndex);
+			}
+			if (backCounterIndex.size() > 0) {
+				Back.setEnabled(true);
+			}
+
+			if(temp == currentIndex)
+				currentIndex++;
 
 			if (currentIndex < questionsList.size()) {
 				Answer.setText("");
 				corr.setText("");
-				showQues();
+				temp = currentIndex;
+				showQues(currentIndex);
 			} else {
 				Next.setEnabled(false);
 			}
 		}
 
 		if (ae.getSource() == Back) {
-			showNext--;
-			--back_counter;
 			nextCount--;
+			
+			temp = (Integer) backCounterIndex.get(0);
+			backCounterIndex.remove(0);
 
 			if (currentIndex > 0) {
 				corr.setText("");
 				Answer.setText("");
-				showQues();
+				showQues(temp);
 			}
-		}
-
-		if (back_counter > 0) {
-			Back.setEnabled(true);
-		} else {
-			Back.setEnabled(false);
 		}
 
 		if (nextCount == 9) {
@@ -234,14 +252,9 @@ public class QuestionFrame implements ActionListener{
 			Next.setEnabled(true);
 		}
 
-		if (attempt == 10) {
+		if (total == 10) {
 			Submit.setEnabled(false);
 			Final.setEnabled(true);
-		}
-
-		if (ae.getSource() == Final) {
-			frame.setVisible(false);
-			// new Result(attempt, correctAns) ;
 		}
 	}
 	
@@ -252,7 +265,7 @@ public class QuestionFrame implements ActionListener{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new QuestionFrame("Riddles.txt");
+					new QuestionFrame("bollywood");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
