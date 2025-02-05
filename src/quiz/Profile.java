@@ -16,11 +16,11 @@ import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 
-import auth.Authenticate;
 import db.CreateConnection;
 
 public class Profile implements ActionListener {
     private JFrame frame;
+    private String name;
     private AggregateIterable<Document> result;
     private JButton quitButton, playAgainButton;
 
@@ -34,6 +34,9 @@ public class Profile implements ActionListener {
     private void getData(ObjectId user) {
         MongoDatabase database = CreateConnection.getDatabase();
         MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
+        MongoCollection<Document> usersCollection = database.getCollection("users");
+        Document userDoc = usersCollection.find(new Document("_id", user)).first();
+        name = userDoc.getString("name");
 
         result = gamePlayCollection.aggregate(Arrays.asList(
             Aggregates.lookup("users", "user_id", "_id", "user_data"),
@@ -45,10 +48,12 @@ public class Profile implements ActionListener {
                 Accumulators.sum("total_correct", "$total_correct")
             )
         ));
+
+        CreateConnection.closeConnection();
     }
 
     private void initialize() {
-        frame = new JFrame("Quiz Profile");
+        frame = new JFrame("Your profile is here" + name);
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -127,13 +132,7 @@ public class Profile implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                new Profile(Authenticate.getUser());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+    public JFrame getFrame() {
+        return frame;
     }
 }

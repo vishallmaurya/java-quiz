@@ -15,6 +15,7 @@ import db.CreateConnection;
 public class Result implements ActionListener{
 
 	private JFrame frame;
+	private JButton profileBtn;
 	private JLabel Total ;
 	private JLabel Attempted ;
 	private JLabel Correct ;
@@ -30,6 +31,8 @@ public class Result implements ActionListener{
 		this.subject = subject;
 		store_result();
 		initialize();
+
+		profileBtn.addActionListener(this);
 		Quit.addActionListener(this);
 		Play_Again.addActionListener(this);
 	}
@@ -57,6 +60,12 @@ public class Result implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		profileBtn = new JButton("Profile");
+		profileBtn.setBackground(new Color(253, 245, 230));
+		profileBtn.setFont(new Font("Stencil", Font.PLAIN, 16));
+		profileBtn.setBounds(650, 5, 100, 40);
+		frame.getContentPane().add(profileBtn);
+
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 784, 461);
 		frame.getContentPane().add(panel);
@@ -112,6 +121,13 @@ public class Result implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == profileBtn) {
+			frame.setVisible(false);
+			frame.dispose();
+			Profile profile = new Profile(Authenticate.getUser());
+			profile.getFrame().setVisible(true);
+		}
+
 		if (ae.getSource() == Play_Again) {
 			frame.setVisible(false);
 			frame.dispose();

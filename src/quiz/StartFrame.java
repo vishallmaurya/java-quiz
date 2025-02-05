@@ -1,8 +1,8 @@
 package quiz;
 
-import java.awt.* ;
-import java.awt.event.* ;
-import javax.swing.* ;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -18,9 +18,9 @@ public class StartFrame implements ActionListener {
 	}
 
 	private void initialize() {
-		frame = new JFrame() ;
+		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setBounds(100, 100, 800, 500);
+		frame.setBounds(60, 60, 800, 700);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,15 +28,22 @@ public class StartFrame implements ActionListener {
 		panel.setBackground(new Color(255, 255, 153));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE).addGap(1))
-		);
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE).addGap(0))
+				groupLayout.createParallelGroup(Alignment.LEADING)// .addGroup(groupLayout.createSequentialGroup()
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)// .addGap(1));
 		);
 
+		// groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		// .addGroup(groupLayout.createSequentialGroup()
+		// .addComponent(panel, GroupLayout.DEFAULT_SIZE, 461,
+		// Short.MAX_VALUE).addGap(0))
+		// );
+
+		groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE));
+
 		JLabel logo = new JLabel("");
+		logo.setVerticalAlignment(SwingConstants.TOP);
 		logo.setIcon(new ImageIcon("./public/images/front.jpg"));
 
 		start = new JButton("START");
@@ -60,29 +67,39 @@ public class StartFrame implements ActionListener {
 		GroupLayout gl_panel = new GroupLayout(panel);
 
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-					.addComponent(logo, GroupLayout.PREFERRED_SIZE, 485, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-					.addGap(6).addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-					.addPreferredGap(ComponentPlacement.RELATED).addComponent(think, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-					.addContainerGap()).addGroup(gl_panel.createSequentialGroup().addGap(63)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-					.addComponent(quit, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-					.addComponent(start, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)).addGap(72))))
-					.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addPreferredGap(ComponentPlacement.RELATED).addComponent(book, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addGap(100))))
-		);
+				gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+						.addComponent(logo, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel
+								.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+										.addGap(6)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_panel.createSequentialGroup()
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(think, GroupLayout.DEFAULT_SIZE, 276,
+																Short.MAX_VALUE)
+														.addContainerGap())
+												.addGroup(gl_panel.createSequentialGroup().addGap(63)
+														.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+																.addComponent(quit, Alignment.LEADING,
+																		GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+																.addComponent(start, Alignment.LEADING,
+																		GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+														.addGap(72))))
+								.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(book, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+										.addGap(100)))));
 
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addComponent(think, GroupLayout.PREFERRED_SIZE, 199, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(start, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE).addGap(18)
-					.addComponent(quit, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE).addGap(34)
-					.addComponent(book, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE).addGap(194))
-					.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(logo, GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE).addGap(147))
-		);
+				gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, gl_panel
+						.createSequentialGroup()
+						.addComponent(think, GroupLayout.PREFERRED_SIZE, 199, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(start, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(quit, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE).addGap(34)
+						.addComponent(book, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE).addGap(194))
+						.addGroup(gl_panel.createSequentialGroup()
+								.addComponent(logo, GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE).addGap(147)));
 
 		panel.setLayout(gl_panel);
 		frame.getContentPane().setLayout(groupLayout);
@@ -91,7 +108,7 @@ public class StartFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == start) {
 			frame.setVisible(false);
-			frame.dispose(); 
+			frame.dispose();
 			Login loginFrame = new Login();
 			loginFrame.getFrame().setVisible(true);
 		}

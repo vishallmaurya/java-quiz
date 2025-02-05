@@ -4,13 +4,17 @@ import java.awt.* ;
 import java.awt.event.* ;
 import javax.swing.* ;
 
+import auth.Authenticate;
+
 public class Instruction implements ActionListener {
 	private JFrame frame;
+	private JButton profileBtn;
 	private JButton Okay ;
 
 	public Instruction() {
 		initialize();
 		
+		profileBtn.addActionListener(this);
 		Okay.addActionListener(this) ;
 	}
 
@@ -22,6 +26,12 @@ public class Instruction implements ActionListener {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		profileBtn = new JButton("Profile");
+		profileBtn.setBackground(new Color(253, 245, 230));
+		profileBtn.setFont(new Font("Stencil", Font.PLAIN, 16));
+		profileBtn.setBounds(650, 5, 100, 40);
+		frame.getContentPane().add(profileBtn);
 		
 		JLabel lblNewLabel_10 = new JLabel("Press back to go to previous question");
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,7 +102,7 @@ public class Instruction implements ActionListener {
 		Okay.setBackground(new Color(253, 245, 230));
 		Okay.setFont(new Font("Stencil", Font.BOLD, 22));
 		Okay.setBounds(579, 406, 150, 44);
-		frame.add(Okay);
+		frame.getContentPane().add(Okay);
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
@@ -101,6 +111,13 @@ public class Instruction implements ActionListener {
 			frame.dispose();
 			Buttons buttons = new Buttons();
 			buttons.getFrame().setVisible(true);
+		}
+
+		if (ae.getSource() == profileBtn) {
+			frame.setVisible(false);
+			frame.dispose();
+			Profile profile = new Profile(Authenticate.getUser());
+			profile.getFrame().setVisible(true);
 		}
 	}
 	

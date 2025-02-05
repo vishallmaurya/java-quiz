@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: StartFrame
+Class-Path: lib\mongodb-driver-core-4.9.1.jar lib\mongodb-driver-sync-4.9.1.jar lib\bson-4.9.1.jar lib\slf4j-api-1.7.36.jar lib\slf4j-simple-2.0.9.jar
