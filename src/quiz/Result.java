@@ -38,17 +38,23 @@ public class Result implements ActionListener{
 	}
 	
 	private void store_result() {
-		MongoDatabase database = CreateConnection.getDatabase();
-		MongoCollection<Document> categoryCollection = database.getCollection("category");
-		MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
-
-		Document categoryInfo = categoryCollection.find(new Document("category", subject)).first();
-		Document newGamePlay = new Document("subject_chosen", categoryInfo.getObjectId("_id"))
-								.append("total_attempts", attempt)
-								.append("total_correct", correct).append("user_id", Authenticate.getUser());
-
-		gamePlayCollection.insertOne(newGamePlay);
-		CreateConnection.closeConnection();
+		try {
+			MongoDatabase database = CreateConnection.getDatabase();
+			MongoCollection<Document> categoryCollection = database.getCollection("category");
+			MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
+	
+			Document categoryInfo = categoryCollection.find(new Document("category", subject)).first();
+			Document newGamePlay = new Document("subject_chosen", categoryInfo.getObjectId("_id"))
+									.append("total_attempts", attempt)
+									.append("total_correct", correct).append("user_id", Authenticate.getUser());
+	
+			gamePlayCollection.insertOne(newGamePlay);
+			CreateConnection.closeConnection();
+		} catch (Exception e) {
+			System.err.println("Error occured during fetching data:  "+ e.getMessage());
+		} finally {
+			CreateConnection.closeConnection();
+		}
 	}
 
 	private void initialize() {

@@ -144,31 +144,35 @@ public class Login implements ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent ae) {
-		MongoDatabase database = CreateConnection.getDatabase();
-		MongoCollection<Document> usersCollection = database.getCollection("users");
-
-		if (ae.getSource() == btnNewButton_1) {
-			String user = textField.getText();
-			String password = String.valueOf(textField_1.getPassword());
-			Document query = new Document("email", user).append("password", password);
-			Document foundUser = usersCollection.find(query).first();
-
-			CreateConnection.closeConnection();
-
-			if (foundUser != null) {
-				lblNewLabel_6.setBounds(320, 340, 140, 40);
-				lblNewLabel_6.setText("Success");
-				Authenticate.setUser(foundUser.getObjectId("_id"));
-				frame.setVisible(false);
-				frame.dispose();
-				Instruction instruction = new Instruction();
-				instruction.getFrame().setVisible(true);
-			} else {
-				lblNewLabel_6.setBounds(250, 340, 400, 40);
-				lblNewLabel_6.setText("Invalid input");
-				lblNewLabel_6.revalidate();
-				lblNewLabel_6.repaint();
+		try {
+			MongoDatabase database = CreateConnection.getDatabase();
+			MongoCollection<Document> usersCollection = database.getCollection("users");
+	
+			if (ae.getSource() == btnNewButton_1) {
+				String user = textField.getText();
+				String password = String.valueOf(textField_1.getPassword());
+				Document query = new Document("email", user).append("password", password);
+				Document foundUser = usersCollection.find(query).first();
+		
+				if (foundUser != null) {
+					lblNewLabel_6.setBounds(320, 340, 140, 40);
+					lblNewLabel_6.setText("Success");
+					Authenticate.setUser(foundUser.getObjectId("_id"));
+					frame.setVisible(false);
+					frame.dispose();
+					Instruction instruction = new Instruction();
+					instruction.getFrame().setVisible(true);
+				} else {
+					lblNewLabel_6.setBounds(250, 340, 400, 40);
+					lblNewLabel_6.setText("Invalid input");
+					lblNewLabel_6.revalidate();
+					lblNewLabel_6.repaint();
+				}
 			}
+		} catch (Exception e) {
+			System.err.println("Error occured during login: " + e.getMessage());
+		} finally {
+			CreateConnection.closeConnection();
 		}
 
 		if (ae.getSource() == btnNewButton) {

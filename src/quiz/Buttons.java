@@ -10,7 +10,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import auth.Authenticate;
 
 public class Buttons implements ActionListener {
-
 	private JFrame frame;
 	private JButton profileBtn;
 	private JButton btnNewButton;
@@ -221,6 +220,7 @@ public class Buttons implements ActionListener {
 		if (ae.getSource() == profileBtn) {
 			frame.setVisible(false);
 			frame.dispose();
+			
 			Profile profile = new Profile(Authenticate.getUser());
 			profile.getFrame().setVisible(true);
 		}

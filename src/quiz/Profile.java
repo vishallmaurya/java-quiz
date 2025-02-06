@@ -26,30 +26,35 @@ public class Profile implements ActionListener {
 
     public Profile(ObjectId user) {
         getData(user);
-        initialize();
         quitButton.addActionListener(this);
         playAgainButton.addActionListener(this);
     }
 
     private void getData(ObjectId user) {
-        MongoDatabase database = CreateConnection.getDatabase();
-        MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
-        MongoCollection<Document> usersCollection = database.getCollection("users");
-        Document userDoc = usersCollection.find(new Document("_id", user)).first();
-        name = userDoc.getString("name");
+        try {
+            MongoDatabase database = CreateConnection.getDatabase();
+            MongoCollection<Document> gamePlayCollection = database.getCollection("gamePlay");
+            MongoCollection<Document> usersCollection = database.getCollection("users");
+            Document userDoc = usersCollection.find(new Document("_id", user)).first();
+            name = userDoc.getString("name");
+    
+            result = gamePlayCollection.aggregate(Arrays.asList(
+                Aggregates.lookup("users", "user_id", "_id", "user_data"),
+                Aggregates.match(Filters.eq("user_data._id", user)),
+                Aggregates.lookup("category", "subject_chosen", "_id", "category_data"),
+                Aggregates.unwind("$category_data"),
+                Aggregates.group("$category_data.category", 
+                    Accumulators.sum("total_attempts", "$total_attempts"),
+                    Accumulators.sum("total_correct", "$total_correct")
+                )
+            ));
 
-        result = gamePlayCollection.aggregate(Arrays.asList(
-            Aggregates.lookup("users", "user_id", "_id", "user_data"),
-            Aggregates.match(Filters.eq("user_data._id", user)),
-            Aggregates.lookup("category", "subject_chosen", "_id", "category_data"),
-            Aggregates.unwind("$category_data"),
-            Aggregates.group("$category_data.category", 
-                Accumulators.sum("total_attempts", "$total_attempts"),
-                Accumulators.sum("total_correct", "$total_correct")
-            )
-        ));
-
-        CreateConnection.closeConnection();
+            initialize();
+        } catch (Exception e) {
+            System.err.println("Error occured during fetching data: " + e.getMessage());
+        } finally {
+            CreateConnection.closeConnection();
+        }
     }
 
     private void initialize() {
@@ -76,7 +81,7 @@ public class Profile implements ActionListener {
         gbc.gridy = 1;
         if (result != null) {
             for (Document doc : result) {
-                String categoryName = doc.getString("_id"); // Now fetching category name
+                String categoryName = doc.getString("_id"); 
                 int totalAttempts = doc.getInteger("total_attempts", 0);
                 int totalCorrect = doc.getInteger("total_correct", 0);
                 int totalWrong = totalAttempts - totalCorrect;
@@ -94,13 +99,12 @@ public class Profile implements ActionListener {
             addLabel(panel, "No data available", gbc);
         }
 
-        // Play Again Button
+        
         playAgainButton = new JButton("PLAY AGAIN");
         styleButton(playAgainButton);
         gbc.gridy++;
         panel.add(playAgainButton, gbc);
 
-        // Quit Button
         quitButton = new JButton("QUIT");
         styleButton(quitButton);
         gbc.gridy++;

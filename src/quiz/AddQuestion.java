@@ -110,12 +110,18 @@ public class AddQuestion implements ActionListener {
                 error.setText("Please fill all the required fields");
                 return;
             }
-
-            MongoDatabase database = CreateConnection.getDatabase();
-            MongoCollection<Document> questionCollection = database.getCollection("questions");
-            Document newQuestion = new Document("category", cat).append("question", ques).append("answer", ans);
-            questionCollection.insertOne(newQuestion);
-            error.setText("Data added successfully");
+            
+            try {
+                MongoDatabase database = CreateConnection.getDatabase();
+                MongoCollection<Document> questionCollection = database.getCollection("questions");
+                Document newQuestion = new Document("category", cat).append("question", ques).append("answer", ans);
+                questionCollection.insertOne(newQuestion);
+                error.setText("Data added successfully");
+            } catch (Exception e) {
+                System.err.println("Error occured during inserting of data: " + e.getMessage());
+            } finally {
+                CreateConnection.closeConnection();
+            }
         }
 
         frame.revalidate();

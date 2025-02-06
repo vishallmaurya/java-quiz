@@ -89,10 +89,6 @@ public class Instruction implements ActionListener {
 		lblNewLabel_2.setBounds(0, 119, 784, 40);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 784, 461);
-		lblNewLabel.setIcon(new ImageIcon("./public/images/pen4.jpg"));
-		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
 		lblNewLabel_4.setBounds(45, 223, 46, 14);
@@ -103,6 +99,14 @@ public class Instruction implements ActionListener {
 		Okay.setFont(new Font("Stencil", Font.BOLD, 22));
 		Okay.setBounds(579, 406, 150, 44);
 		frame.getContentPane().add(Okay);
+
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 784, 461);
+		lblNewLabel.setIcon(new ImageIcon("./public/images/pen4.jpg"));
+		frame.getContentPane().add(lblNewLabel);
+
+		frame.getContentPane().revalidate();
+		frame.getContentPane().repaint();
 	}
 	
 	public void actionPerformed(ActionEvent ae) {

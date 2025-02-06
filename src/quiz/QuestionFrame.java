@@ -63,16 +63,22 @@ public class QuestionFrame implements ActionListener{
 	}
 
 	private void fetchQuestions(String subject) {
-		MongoDatabase database = CreateConnection.getDatabase();
-		MongoCollection<Document> questionsCollection = database.getCollection("questions");
-		questionsList = questionsCollection.find(new Document("category", subject)).into(new ArrayList<>());
-		Collections.shuffle(questionsList);
-		
-		if (questionsList.size() > 10) {
-			questionsList = questionsList.subList(0, 10);
+		try {
+			MongoDatabase database = CreateConnection.getDatabase();
+			MongoCollection<Document> questionsCollection = database.getCollection("questions");
+			questionsList = questionsCollection.find(new Document("category", subject)).into(new ArrayList<>());
+			Collections.shuffle(questionsList);
+			
+			if (questionsList.size() > 10) {
+				questionsList = questionsList.subList(0, 10);
+			}
+	
+			CreateConnection.closeConnection();
+		} catch (Exception e) {
+			System.err.println("Error occurred during fetching data:  " + e.getMessage());
+		} finally {
+			CreateConnection.closeConnection();
 		}
-
-		CreateConnection.closeConnection();
 	}
 
 	private void showQues(int ind) {

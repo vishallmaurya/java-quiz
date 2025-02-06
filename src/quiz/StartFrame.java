@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-// import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StartFrame implements ActionListener {
@@ -37,7 +36,7 @@ public class StartFrame implements ActionListener {
                         .addComponent(panel, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE).addGap(0)));
 
         JLabel logo = new JLabel("");
-        logo.setIcon(new ImageIcon("front.jpg"));
+        logo.setIcon(new ImageIcon("./public/images/front.jpg"));
 
         start = new JButton("START");
         start.setBackground(new Color(51, 51, 0));
@@ -53,10 +52,10 @@ public class StartFrame implements ActionListener {
 
         JLabel think = new JLabel("");
         think.setHorizontalAlignment(SwingConstants.CENTER);
-        think.setIcon(new ImageIcon("think.gif"));
+        think.setIcon(new ImageIcon("./public/gifs/think.gif"));
 
         JLabel book = new JLabel("");
-        book.setIcon(new ImageIcon("books.gif"));
+        book.setIcon(new ImageIcon("./public/gifs/books.gif"));
         GroupLayout gl_panel = new GroupLayout(panel);
 
         gl_panel.setHorizontalGroup(

@@ -201,22 +201,28 @@ public class SignUp implements ActionListener {
 				return;
 			}
 
-			MongoDatabase database = CreateConnection.getDatabase();
-			MongoCollection<Document> userCollection = database.getCollection("users");
-
-			Document existingUser = userCollection.find(new Document("email", email)).first();
-			
-			if (existingUser != null) {
-				usename_warn.setText("Email already exists");
-			} else {
-				Document newUser = new Document("name", name).append("email", email).append("password", password);
-				userCollection.insertOne(newUser);
-				Authenticate.setUser(newUser.getObjectId("_id"));
-				pass_warn.setText("Successfully registered");
-				frame.setVisible(false);
-				frame.dispose();
-				Instruction instruction = new Instruction();
-				instruction.getFrame().setVisible(true);
+			try {
+				MongoDatabase database = CreateConnection.getDatabase();
+				MongoCollection<Document> userCollection = database.getCollection("users");
+	
+				Document existingUser = userCollection.find(new Document("email", email)).first();
+				
+				if (existingUser != null) {
+					usename_warn.setText("Email already exists");
+				} else {
+					Document newUser = new Document("name", name).append("email", email).append("password", password);
+					userCollection.insertOne(newUser);
+					Authenticate.setUser(newUser.getObjectId("_id"));
+					pass_warn.setText("Successfully registered");
+					frame.setVisible(false);
+					frame.dispose();
+					Instruction instruction = new Instruction();
+					instruction.getFrame().setVisible(true);
+				}
+			} catch (Exception e) {
+				System.err.println("Error during storing data:  " + e.getMessage());
+			} finally {
+				CreateConnection.closeConnection();
 			}
 		}
 	}
