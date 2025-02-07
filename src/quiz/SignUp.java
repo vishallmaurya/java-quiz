@@ -57,7 +57,7 @@ public class SignUp implements ActionListener {
 		
 		JLabel quote = new JLabel("");
 		quote.setVerticalAlignment(SwingConstants.TOP);
-		quote.setIcon(new ImageIcon("./public/images/SIGN UP 2.jpg"));
+		quote.setIcon(new ImageIcon(getClass().getResource("/public/images/SIGN UP 2.jpg")));
 		
 		email = new JLabel("EMAIL");
 		email.setForeground(new Color(102, 0, 0));
@@ -92,7 +92,7 @@ public class SignUp implements ActionListener {
 		
 		JLabel book_gif = new JLabel("");
 		book_gif.setHorizontalAlignment(SwingConstants.CENTER);
-		book_gif.setIcon(new ImageIcon("./public/gifs/learning_small.gif"));
+		book_gif.setIcon(new ImageIcon(getClass().getResource("/public/gifs/learning_small.gif")));
 		
 		btnNewButton = new JButton("Register");
 		btnNewButton.setBackground(new Color(153, 0, 0));

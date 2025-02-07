@@ -73,7 +73,7 @@ public class Profile implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
 
-        JLabel titleLabel = new JLabel("SCORECARD", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Hello " + name, JLabel.CENTER);
         titleLabel.setFont(new Font("Stencil", Font.BOLD, 40));
         titleLabel.setForeground(Color.WHITE);
         panel.add(titleLabel, gbc);

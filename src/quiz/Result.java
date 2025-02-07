@@ -122,7 +122,7 @@ public class Result implements ActionListener{
 		
 		JLabel img = new JLabel("New label");
 		img.setBounds(0, 0, 784, 461);
-		img.setIcon(new ImageIcon("./public/images/faded5.jpg"));
+		img.setIcon(new ImageIcon(getClass().getResource("/public/images/faded5.jpg")));
 		panel.add(img);
 	}
 	

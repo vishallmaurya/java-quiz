@@ -60,7 +60,7 @@ public class Buttons implements ActionListener {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setIcon(new ImageIcon("./public/images/fields.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/public/images/fields.jpg")));
 
 		JLabel lblNewLabel_1 = new JLabel("CHOOSE THE APPROPRIATE");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -106,7 +106,7 @@ public class Buttons implements ActionListener {
 		lblNewLabel_2.setFont(new Font("MV Boli", Font.BOLD, 20));
 
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("./public/images/small_open_book.gif"));
+		lblNewLabel_3.setIcon(new ImageIcon(getClass().getResource("/public/gifs/small_open_book.gif")));
 
 		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);

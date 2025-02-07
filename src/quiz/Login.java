@@ -49,7 +49,7 @@ public class Login implements ActionListener{
 		);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("./public/images/login_page.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/public/images/login_page.jpg")));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -80,10 +80,10 @@ public class Login implements ActionListener{
 		frame.add(btnNewButton) ;
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("./public/gifs/small_bulb.gif"));
+		lblNewLabel_4.setIcon(new ImageIcon(getClass().getResource("/public/gifs/small_bulb.gif")));
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("./public/gifs/small_open_book.gif"));
+		lblNewLabel_5.setIcon(new ImageIcon(getClass().getResource("/public/gifs/small_open_book.gif")));
 		
 		btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.setBackground(new Color(139, 0, 0));

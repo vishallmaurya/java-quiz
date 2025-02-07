@@ -105,7 +105,7 @@ public class QuestionFrame implements ActionListener{
 		
 		JLabel logo = new JLabel("");
 		logo.setBounds(275, 5, 800, 300);
-		logo.setIcon(new ImageIcon("./public/images/quiz_it_out.jpg"));
+		logo.setIcon(new ImageIcon(getClass().getResource("/public/images/quiz_it_out.jpg")));
 		panel.add(logo);
 		
 		Question = new JLabel("");
@@ -152,22 +152,22 @@ public class QuestionFrame implements ActionListener{
 		panel.add(Quit);
 		
 		JLabel dog = new JLabel("");
-		dog.setIcon(new ImageIcon("./public/gifs/small_dog.gif"));
+		dog.setIcon(new ImageIcon(getClass().getResource("/public/gifs/small_dog.gif")));
 		dog.setBounds(617, 506, 255, 212);
 		panel.add(dog);
 			
 		JLabel think1 = new JLabel("");
-		think1.setIcon(new ImageIcon("./public/gifs/think.gif"));
+		think1.setIcon(new ImageIcon(getClass().getResource("/public/gifs/think.gif")));
 		think1.setBounds(35, 21, 208, 206);
 		panel.add(think1);
 		
 		JLabel think2 = new JLabel("");
-		think2.setIcon(new ImageIcon("./public/gifs/think.gif"));
+		think2.setIcon(new ImageIcon(getClass().getResource("/public/gifs/think.gif")));
 		think2.setBounds(1125, 21, 194, 215);
 		panel.add(think2);
 		
 		JLabel book = new JLabel(" ");
-		book.setIcon(new ImageIcon("./public/gifs/learning_small.gif"));
+		book.setIcon(new ImageIcon(getClass().getResource("/public/gifs/learning_small.gif")));
 		book.setBounds(1125, 578, 200, 120);
 		panel.add(book);
 		

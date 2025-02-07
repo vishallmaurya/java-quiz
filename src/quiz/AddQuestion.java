@@ -79,7 +79,7 @@ public class AddQuestion implements ActionListener {
 
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setBounds(0, 0, 784, 461);
-        lblNewLabel.setIcon(new ImageIcon("./public/images/pen4.jpg"));
+        lblNewLabel.setIcon(new ImageIcon(getClass().getResource("/public/images/pen4.jpg")));
         frame.getContentPane().add(lblNewLabel);
 
 
