@@ -105,39 +105,48 @@ public class Login extends JPanel implements ActionListener {
         lblMessage = new JLabel();
         lblMessage.setForeground(Color.RED);
         lblMessage.setFont(new Font("Swis721 WGL4 BT", Font.BOLD, 12));
-        lblMessage.setBounds(900, 350, 200, 40);
+        lblMessage.setBounds(900, 350, 400, 40);
         add(lblMessage);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        try {
-            MongoDatabase database = CreateConnection.getDatabase();
-            MongoCollection<Document> usersCollection = database.getCollection("users");
+        if (ae.getSource() == btnLogin) {
+            MongoDatabase database = null;
+            MongoCollection<Document> usersCollection = null;
+            try {
+                database = CreateConnection.getDatabase();
+                usersCollection = database.getCollection("users");
+                
+                    String user = textField.getText();
+                    String password = String.valueOf(textField_1.getPassword());
+                    Document query = new Document("email", user).append("password", password);
+                    Document foundUser = usersCollection.find(query).first();
 
-            if (ae.getSource() == btnLogin) {
-                String user = textField.getText();
-                String password = String.valueOf(textField_1.getPassword());
-                Document query = new Document("email", user).append("password", password);
-                Document foundUser = usersCollection.find(query).first();
+                    if (foundUser != null) {
+                        lblMessage.setText("Success");
+                        Authenticate.setUser(foundUser.getObjectId("_id"));
 
-                if (foundUser != null) {
-                    lblMessage.setText("Success");
-                    Authenticate.setUser(foundUser.getObjectId("_id"));
-
-                    mainPanel.revalidate();
-                    mainPanel.repaint();
-                    cardLayout.show(mainPanel, "instruction");
-                } else {
-                    lblMessage.setText("Invalid input");
-                    lblMessage.revalidate();
-                    lblMessage.repaint();
-                }
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
+                        cardLayout.show(mainPanel, "instruction");
+                    } else {
+                        lblMessage.setText("Invalid input");
+                        lblMessage.revalidate();
+                        lblMessage.repaint();
+                    }
+                
+            } catch (Exception e) {
+                lblMessage.setText("Unexpected error occured!!" + e.getMessage());
+                lblMessage.revalidate();
+                lblMessage.repaint();
+            //     JOptionPane.showMessageDialog(null, 
+            //             database + " ; "+ usersCollection + e.getMessage(), 
+            // "Connection Error", 
+            // JOptionPane.ERROR_MESSAGE);
+            } finally {
+                CreateConnection.closeConnection();
             }
-        } catch (Exception e) {
-            System.err.println("Error occurred during login: " + e.getMessage());
-        } finally {
-            CreateConnection.closeConnection();
         }
 
         if (ae.getSource() == btnSignUp) {
