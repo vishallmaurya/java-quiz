@@ -4,3 +4,5 @@ encryption.py
 EncryptAndStore.*
 *.key
 *.dat
+*.exe
+*.zip
