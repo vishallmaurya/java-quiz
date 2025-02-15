@@ -18,22 +18,19 @@ public class VaultClient {
     private static String PROJECT_ID = null;
     private static final String APP_NAME = "Quizathon"; 
     private static final String TOKEN_URL = "https://auth.idp.hashicorp.com/oauth2/token";
-    private static final String VAULT_URL = "https://api.cloud.hashicorp.com/secrets/2023-11-28/organizations/" + ORG_ID +
-            "/projects/" + PROJECT_ID + "/apps/" + APP_NAME + "/secrets:open";
+    
     private static Map<String, String> secrets = null;
 
     private static void initialize() {
-        String[] credentials = getCredentialsFromWindowsCredentialManager("MyApp");
-        if (credentials != null) {
-            CLIENT_ID = credentials[0];
+        String credentials = getCredentialsFromWindowsCredentialManager("MyApp");
         
-            String[] secretParts = credentials[1].split(":");
-    
-            CLIENT_SECRET = secretParts[0];
-            ORG_ID = secretParts[1];
-            PROJECT_ID = secretParts[2];
-
-            System.out.println("Yaha to aara nhi hoga???" + CLIENT_SECRET);
+        if (credentials != null) {        
+            String[] secretParts = credentials.split(":");
+            
+            CLIENT_ID = secretParts[0];
+            CLIENT_SECRET = secretParts[1];
+            ORG_ID = secretParts[2];
+            PROJECT_ID = secretParts[3];
         }
     }
 
@@ -53,8 +50,6 @@ public class VaultClient {
             try (OutputStream os = conn.getOutputStream()) {
                 os.write(data.getBytes(StandardCharsets.UTF_8));
             }
-
-            System.out.println(CLIENT_ID + " , " + CLIENT_SECRET + " , " + ORG_ID + " , " + PROJECT_ID);
 
             int responseCode = conn.getResponseCode();
             if (responseCode != 200) {
@@ -89,6 +84,8 @@ public class VaultClient {
                 System.err.println("Failed to retrieve API token.");
                 return ;
             }
+            String VAULT_URL = "https://api.cloud.hashicorp.com/secrets/2023-11-28/organizations/" + ORG_ID +
+            "/projects/" + PROJECT_ID + "/apps/" + APP_NAME + "/secrets:open";
 
             URL url = new URL(VAULT_URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -137,14 +134,13 @@ public class VaultClient {
         return secrets.getOrDefault(secretName, null);
     }
 
-    private static String[] getCredentialsFromWindowsCredentialManager(String targetName) {
+    private static String getCredentialsFromWindowsCredentialManager(String targetName) {
         try {
             Process process = Runtime.getRuntime().exec("cmdkey /list");
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             boolean found = false;
             String username = null;
-            String password = null;
 
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
@@ -158,23 +154,15 @@ public class VaultClient {
                     if (parts.length > 1) {
                         username = parts[1].trim();
                     }
-                }
-
-                if (found && line.startsWith("Password:")) {
-                    String[] parts = line.split(":", 2);
-                    if (parts.length > 1) {
-                        password = parts[1].trim();
-                    }
-                    break; // Exit once both values are found
+                    break;
                 }
             }
 
             process.waitFor();
             reader.close();
-            System.out.println("Username:  " + username + " and  Password:  " + password);
 
-            if (username != null && password != null) {
-                return new String[]{username, password}; // Return CLIENT_ID and CLIENT_SECRET
+            if (username != null) {
+                return username;
             }
         } catch (Exception e) {
             e.printStackTrace();
