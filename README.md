@@ -1,6 +1,6 @@
 To download .exe file click on it
 
-https://drive.google.com/file/d/1sv7te-rjPH0pKlYqHwXi5sLewlazd_zq/view?usp=drive_link
+https://drive.google.com/file/d/14p2SrTfVn4_wL1y1PjK-2xZQ73osOMso/view?usp=sharing
 
 
 
