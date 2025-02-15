@@ -1,7 +1,5 @@
 package db;
 
-import javax.swing.JOptionPane;
-
 import com.mongodb.client.*;
 import utils.EnvLoader;
 
@@ -18,10 +16,7 @@ public class CreateConnection {
             }
             return mongoClient.getDatabase(EnvLoader.getEnv("DB_NAME"));
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, 
-                            uri + "; " + exception.getMessage(), 
-                "checking connectivity", 
-                JOptionPane.ERROR_MESSAGE);
+            System.out.println(exception.getMessage());
         }
         return null;
     }

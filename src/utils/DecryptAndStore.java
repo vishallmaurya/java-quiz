@@ -7,7 +7,6 @@ import javax.crypto.spec.*;
 import java.util.Base64;
 import java.io.*;
 import java.nio.file.*;
-import javax.swing.JOptionPane;
 
 public class DecryptAndStore {
     private static final String KEY_FILE = "encryption_key.key";
@@ -75,7 +74,6 @@ public class DecryptAndStore {
             Process process = processBuilder.start();
             process.waitFor();
 
-            JOptionPane.showMessageDialog(null, "Credentials stored securely!", "Success", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Credentials stored in Windows Credential Manager.");
         } catch (Exception e) {
             e.printStackTrace();
