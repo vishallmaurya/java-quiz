@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 final public class EnvLoader {
-    private static final String ENV_FILE = "..env";
+    private static final String ENV_FILE = ".env";
     private static final Map<String, String> envVariables = new HashMap<>();
 
     static {

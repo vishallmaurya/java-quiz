@@ -185,9 +185,7 @@ private void initialize() {
 				}
 			} catch (Exception exception) {
 				System.err.println("Error during storing data:  " + exception.getMessage());
-			} finally {
-				CreateConnection.closeConnection();
-			}
+			} 
 		}
 	}
 }

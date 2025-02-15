@@ -7,6 +7,7 @@ import javax.crypto.*;
 import javax.crypto.spec.*;
 import java.util.Base64;
 import java.io.*;
+import javax.swing.JOptionPane;
 
 public class DecryptAndStore {
     private static final String KEY_FILE = "encryption_key.key";
@@ -26,11 +27,13 @@ public class DecryptAndStore {
 
             storeInWindowsCredentialManager(decryptedText);
 
-            Files.deleteIfExists(Paths.get(ENCRYPTED_FILE));
-            Files.deleteIfExists(Paths.get("DecryptAndStore.class"));
-            // Files.deleteIfExists(Paths.get("DecryptAndStore.java"));
+            deleteFile(KEY_FILE);
+            deleteFile(ENCRYPTED_FILE);
+            Path classFilePath = Paths.get(new File(DecryptAndStore.class.getProtectionDomain().getCodeSource().getLocation().toURI())
+                    .getParent(), "utils", "DecryptAndStore.class");
+            deleteFile(classFilePath.toString());
 
-            System.out.println(" Credentials stored securely! Encrypted file and script deleted.");
+            System.out.println("Credentials stored securely! Encrypted file and script deleted.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,8 +44,25 @@ public class DecryptAndStore {
             String command = String.format("cmdkey /generic:MyApp /user:%s /pass:%s", data, data);
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
+            JOptionPane.showMessageDialog(null, 
+                            data, 
+                            "Decrypted or not", 
+                            JOptionPane.ERROR_MESSAGE);
             System.out.println("Credentials stored in Windows Credential Manager.");
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteFile(String filePath) {
+        try {
+            if (Files.deleteIfExists(Paths.get(filePath))) {
+                System.out.println("Deleted: " + filePath);
+            } else {
+                System.out.println("File not found: " + filePath);
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to delete: " + filePath);
             e.printStackTrace();
         }
     }

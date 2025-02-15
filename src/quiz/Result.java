@@ -51,9 +51,7 @@ public class Result extends JPanel implements ActionListener {
             }
         } catch (Exception e) {
             System.err.println("Error storing result: " + e.getMessage());
-        } finally {
-            CreateConnection.closeConnection();
-        }
+        } 
     }
 
     private void initializeUI() {

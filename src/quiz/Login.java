@@ -140,13 +140,7 @@ public class Login extends JPanel implements ActionListener {
                 lblMessage.setText("Unexpected error occured!!" + e.getMessage());
                 lblMessage.revalidate();
                 lblMessage.repaint();
-            //     JOptionPane.showMessageDialog(null, 
-            //             database + " ; "+ usersCollection + e.getMessage(), 
-            // "Connection Error", 
-            // JOptionPane.ERROR_MESSAGE);
-            } finally {
-                CreateConnection.closeConnection();
-            }
+            } 
         }
 
         if (ae.getSource() == btnSignUp) {

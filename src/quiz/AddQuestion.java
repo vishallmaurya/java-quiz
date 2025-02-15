@@ -119,8 +119,6 @@ public class AddQuestion implements ActionListener {
                 error.setText("Data added successfully");
             } catch (Exception e) {
                 System.err.println("Error occured during inserting of data: " + e.getMessage());
-            } finally {
-                CreateConnection.closeConnection();
             }
         }
 

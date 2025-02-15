@@ -71,9 +71,7 @@ public class QuestionFrame extends JPanel implements ActionListener {
             CreateConnection.closeConnection();
         } catch (Exception e) {
             System.err.println("Error fetching data: " + e.getMessage());
-        } finally {
-            CreateConnection.closeConnection();
-        }
+        } 
     }
 
     private void showQues(int ind) {

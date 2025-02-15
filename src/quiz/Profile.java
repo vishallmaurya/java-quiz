@@ -61,8 +61,6 @@ public class Profile extends JPanel implements ActionListener {
             initialize();
         } catch (Exception e) {
             System.err.println("Error occurred during fetching data: " + e.getMessage());
-        } finally {
-            CreateConnection.closeConnection();
         }
     }
 
