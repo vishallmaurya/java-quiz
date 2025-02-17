@@ -6,7 +6,7 @@ https://drive.google.com/file/d/10LN8cvUwk2nH16ELs5OwWh_JeleGsvyM/view?usp=shari
 
 Problem Statement - Quiz on different fields
 
-
+<!-- 
 (i)	First Frame(Intro Fame): Number of buttons-2, i.e., start and quit.
 Start: The user enters the log in page/frame. This frame is used to register the user or to let the user log in oneself. 
 	Log in : The user has to enter two fields in this frame to log in oneself. This is done with the help of a pre-created file which stores the data of all the registered users in a particular format. 
@@ -53,4 +53,4 @@ Quit button will terminates the program
 Quit: Terminates the entire program.
 
 
-
+ -->
